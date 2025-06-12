@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    table
+        thead
+            tr
+                th Game ID
+                th Num Guesses
+                th Started
+        tbody
+            each g in games
+                tr
+                    td
+                        a(href="/history/"+g.id) #{g.id}
+                    td #{g.guesses.length}
+                    td #{g.time}
+    a(href="/") Play the game!

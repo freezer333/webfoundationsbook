@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .main-content
+        h1 Welcome! 
+        if error
+            p Whoops - #{error}
+        form(action='/login', method='post').rounded-section
+            div
+                input(type='text', name='username', placeholder='Username')
+            div     
+                input(type='password', name='password', placeholder='Password')
+            div     
+                input(type='submit', value='Login')
+
+    nav.area: p Don't have an account?  Please <a href='/signup'>signup</a>!
+    nav.play-new
+        p: a(href="/") Start over

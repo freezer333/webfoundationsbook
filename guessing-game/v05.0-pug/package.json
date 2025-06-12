@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "better-sqlite3": "^11.5.0",
+    "dotenv": "^16.4.5",
+    "pug": "^3.0.3",
+    "wf-framework": "^1.0.0",
+    "wf-guess-db": "^1.0.3",
+    "wf-guess-game": "^1.0.0"
+  }
+}

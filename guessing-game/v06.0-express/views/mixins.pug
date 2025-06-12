@@ -1,0 +1,14 @@
+mixin guess(guess, secret)
+    span #{guess} - 
+    if guess == secret
+        span Correct!
+    else if guess < secret 
+        span Too low! 
+    else 
+        span Too high!
+
+mixin guess_list(guesses, secret)
+    ul
+        each guess in guesses
+            li
+                +guess(guess, secret)

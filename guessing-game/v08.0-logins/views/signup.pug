@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 Signup! 
+    form(action='/signup', method='post')
+        p Please create a username, and a strong password.  We'll trust you will create a good password, but we really should check!
+        if error 
+            p Whoops - #{error}
+        div
+            label(for='username') Username:
+            input(type='text', name='username', placeholder='Username')
+        div     
+            label(for='password') Password:
+            input(type='password', name='password', placeholder='Password')
+        div     
+            label(for='password2') Password Confirmation:
+            input(type='password', name='password2', placeholder='Confirm Password')
+        div     
+            input(type='submit', value='Sign up')
+    
+    p Already have an account?  Please <a href='/login'>login</a>!

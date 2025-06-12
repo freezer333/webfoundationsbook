@@ -1,0 +1,31 @@
+extends layout.pug
+
+block content
+    nav
+        a(href="/history") Game History
+    .container#game
+        table
+            thead
+                tr
+                    th Value
+                    th Time
+            tbody
+                tr(v-for='g in game_guesses')
+                    td {{g.value}}
+                    td {{g.time}}
+    script. 
+        Vue.createApp({
+            data: function () {
+                return {
+                    game_guesses: []
+                }
+            },
+            mounted: async function() {
+                // This is tricky.  The pug model has the game id, and we
+                // are putting it in the source code here.  Do a view-source
+                // in your browser to see the game id.
+                const response = await axios.get('/history/#{game_id}/guesses');
+                this.game_guesses = response.data;
+            }
+        }).mount('#game')
+    

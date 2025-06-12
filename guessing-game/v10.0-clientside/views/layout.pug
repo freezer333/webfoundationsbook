@@ -1,0 +1,17 @@
+doctype html
+html 
+    head 
+        title Guessing Game 
+        meta(name="viewport", content="width=device-width,initial-scale=1")
+        link(rel="stylesheet", href="/guess.css")
+    body 
+        .grid
+            block content
+            nav.login
+                if username 
+                    p 
+                        span Logged in as <b>#{username}</b>
+                        br
+                        a(href='/logout') Logout
+                else 
+                    p: a(href='/login') Login

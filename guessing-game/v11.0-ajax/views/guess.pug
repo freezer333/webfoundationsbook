@@ -1,0 +1,47 @@
+extends layout
+include mixins
+block scripts 
+    script(src="/guess.js")
+    
+
+block content
+    section.main-content#guess
+        
+        //- The CSS hides guess-feedback on page load.  Later, when we start processing guesses, 
+        //- we'll hide guess-instructions and show guess-feedback if the guess is incorrect.
+        //- This simplifies our design of even handlers.
+        p.guess-instructions I'm thinking of a number from 1-10!
+        p.guess-feedback  
+            span Sorry, your guess was 
+            span.response 
+            span , try again! 
+
+        .guess-grid        
+            .rounded-section.guess-form 
+                label(for="guess") Enter your guess: 
+                .guess-input 
+                    input(name="guess", required, placeholder="1-10", type="number", min="1", max="10")
+                    button(type="button") Submit
+                        
+            ul.guess-list 
+                //- We'll add the guess elements here.
+    
+    section.main-content#complete
+        h1 Great job!
+        .rounded-section.correct   
+            h1
+                //- We'll update the element(s) with .secret class to contain the secret number
+                //- in JavaScript, when it's time to show the secret number.
+                span.secret 
+                span was the number!
+            p 
+                span It took you 
+                // We'll update all the elements with class .number-of-guesses to contain the number of guesses
+                // in JavaScript, when it's time to show the number of guesses.
+                span.number-of-guesses 
+                span  guesses!
+    
+    nav.area
+        p: a(href="/history") Game History
+    nav.play-new
+        p: a(href="/") Start over

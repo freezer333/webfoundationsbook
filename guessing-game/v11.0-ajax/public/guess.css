@@ -1,0 +1,212 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*  The following CSS rules are active on all screen sizes, however 
+    some are overridden by the media query below. */
+
+/*  The main layout is 2 columns, two rows.  Top row is a header, 
+    bottom row is simply the content - spanning two columns. */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "top-left       top-right"
+        "main           main";
+    place-items: stretch;
+}
+
+/*  The summary on the game history page is not used for small screens */
+.summary {
+    display: none;
+}
+
+
+/*  All navs have dark blue background and are centered.  There are
+    three navs in the app, login, area (which moves you between history
+    and game play), and another to start a new game */
+nav {
+    text-align: center;
+    background-color: darkblue;
+    color: white;
+    padding-inline: 2rem;
+
+    a {
+        color: white;
+    }
+}
+
+nav.login {
+    grid-area: top-right;
+    text-align: right;
+}
+
+nav.area {
+    grid-area: top-left;
+    text-align: left;
+}
+
+/* This is fixed to the bottom of the screen on small
+   devices, but will move up to the top on larger ones. */
+nav.play-new {
+    position: fixed;
+    width: 100%;
+    background-color: darkblue;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    bottom: 0px;
+    height: 50px;
+}
+
+.main-content {
+    grid-area: main;
+    padding: 2rem;
+    /* Leave room for the fixed play-new nav at bottom */
+    margin-bottom: 50px;
+}
+
+/* Base class for many of the sections in the app, forms, guess resutls */
+.rounded-section {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-width: 2px;
+    border-style: solid
+}
+
+/* Controls the input box for guess and button.  They are 
+   lined up horizontally using flexbox, with the input box
+   growing to take up the available space */
+.guess-input {
+    width: 100%;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+        font-size: larger;
+    }
+
+    button {
+        margin-left: 1rem;
+    }
+}
+
+form {
+    background-color: lightgray;
+    border-color: gray;
+}
+
+/* Spacing and sizing for all inputs */
+input {
+    margin-bottom: 1rem;
+    font-size: larger;
+}
+
+/* Make all the button a bit more spacious */
+button {
+    padding: 1rem;
+    font-size: larger;
+}
+
+/* Labels will appear above inputs */
+label {
+    display: block;
+}
+
+/* The guess list is a simple list of guesses, with the most recent
+   guess at the top.  The list is styled to remove the bullet points
+   and add some spacing between guesses */
+.guess-list {
+    padding-inline-start: 0;
+
+    li {
+        list-style-type: none;
+        margin-bottom: 1rem;
+    }
+}
+
+/*  The list items all have different color codes */
+.correct {
+    background-color: lightgreen;
+    border-color: green;
+}
+
+.low {
+    background-color: lightskyblue;
+    border-color: skyblue;
+}
+
+.high {
+    background-color: lightcoral;
+    border-color: coral;
+}
+
+/* For larger screens, we move the play new nav to the top center, which 
+   now has three columns.  The main content area occupies the entire
+    bottom row, but will be further divided into two columns by another grid */
+@media screen and (min-width: 960px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+
+        grid-template-areas:
+            "top-left   top-mid    top-right"
+            "main           main   main";
+    }
+
+
+    /* This is displayed on the game history page when screen is large enough. */
+    .summary {
+        display: block;
+    }
+
+    /* Use inherit to reset properties that only made sense for 
+       the fixed nav at bottom */
+    nav.play-new {
+        position: static;
+        grid-area: top-mid;
+        background-color: darkblue;
+        height: inherit;
+        padding: inherit;
+    }
+
+    /* Main content grid - shows guesses and input in columns */
+    .guess-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        column-gap: 3rem;
+        grid-template-areas:
+            "guess-input  guess-list";
+        justify-items: stretch;
+        align-items: start;
+    }
+
+    /* Left side of guess grid */
+    .guess-grid form {
+        grid-area: guess-input;
+    }
+
+    /* Right side of guess grid */
+    .guess-list {
+        grid-area: guess-list;
+    }
+
+
+}
+
+
+/** Initial states for UI **/
+#complete {
+    display: none;
+}
+
+.guess-feedback {
+    display: none;
+}

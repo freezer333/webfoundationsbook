@@ -1,0 +1,15 @@
+{
+  "name": "wf-framework",
+  "version": "1.0.1",
+  "description": "Simple web framework for Foundations of Web Development",
+  "main": "framework.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freezer333"
+  },
+  "author": "",
+  "license": "ISC"
+}

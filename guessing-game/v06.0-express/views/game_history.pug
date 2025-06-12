@@ -1,0 +1,6 @@
+extends layout
+include mixins 
+
+block content
+    +guess_list(game.guesses, game.secret)    
+    a(href="/history") Back to game history!

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tiny Example</title>
+        <style>
+            h1 {
+                text-decoration:underline;
+            }
+            span {
+                color:blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Let's get started!</h1>
+        <p>This is an example of a <span>very, very</span> minimal web page.<p>
+        <p>
+            <button type='button'>Click me</button>
+        </p>
+        <script>
+        // Change the "very, very" to red, and add a new text snippet
+        // with a random number, and remove the button so it can't be clicked
+        // again!
+        document.querySelector('button').addEventListener('click', () => {
+            document.querySelector('span').style.color = 'red';
+            const n = Math.ceil(Math.random() * 10);
+            const p = `<p>Random number generated client side: ${n}`;
+            document.querySelector('p').innerHTML += p;
+            document.querySelector('button').remove();
+        });
+    </script>
+    </body>
+</html>
+

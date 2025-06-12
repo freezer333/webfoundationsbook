@@ -23,14 +23,6 @@ Each major concept is accompanied by annotated, working code examples. A single 
 
 The code in this repo is organized to mirror the progression of the book chapters. Each folder corresponds to a major topic or a specific iteration of the example application:
 
-```
-/chapter01-network-basics/
-/chapter03-html-css-basics/
-/guessing-game-v1/
-/guessing-game-v9/
-/...
-```
-
 Each example is self-contained and includes any necessary dependencies or configuration notes in a `README.md` or code comments.
 
 ## Getting Started

@@ -1,0 +1,13 @@
+doctype html
+html 
+    head 
+        title Guessing Game 
+    body 
+        block content
+        if username 
+            p 
+                span Logged in as <b>#{username}</b>
+                br
+                a(href='/logout') Logout
+        else 
+            p: a(href='/login') Login

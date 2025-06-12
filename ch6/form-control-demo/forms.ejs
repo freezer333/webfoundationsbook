@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+    <% if (method=='get' ) { %>
+        <title>Get data</title>
+        <% } else { %>
+            <title>Posted data</title>
+            <% } %>
+
+</head>
+
+<body>
+    <% if (method=='get' ) { %>
+        <title>Getted (?) data</title>
+        <% } else { %>
+            <title>Posted data</title>
+            <% } %>
+                <% for (q in data) { %>
+                    <p>
+                        <%= q %> -&gt; <%= data[q] %>
+                    </p>
+                    <% } %>
+                        <a href="/">Back</a>
+</body>
+
+</html>

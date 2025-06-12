@@ -1,0 +1,84 @@
+extends layout.pug
+
+block content
+    nav
+        a(href="/history") Game History
+    //- The Vue app is mounted to the div with id="play"
+    .container#play
+        //- We will use the success variable to conditionally
+        //- render the success or play sections
+        section(v-if="success")
+            h1 Great job! 
+            //- We use the Vue click event instead of built-in HTML onclick
+            a(href="#", @click='init()') Play again!
+        section(v-else)
+            //- If there are no guesses, then we are starting a new game
+            p(v-if='guesses.length === 0') I'm thinking of a number from 1-10!
+            //- If there are guesses, then we are in the middle of a game
+            p(v-else) Sorry your guess was {{guesses[guesses.length - 1].result}}, try again! 
+                
+            p
+                label(for="guess") Enter your guess: 
+                input(id="guess", v-model='guess', placeholder="1-10", type="number", min="1", max="10")
+            p
+                //- We use the Vue click event instead of built-in HTML onclick
+                button(@click = 'doGuess()', type='type') Submit 
+        //- Here is the most helpful part of being reactive - no list generation!
+        section 
+            ul
+                //- The class can be conditionally applied
+                li(v-for='guess in guesses', :class="{correct: guess.result === 'complete', low: guess.result === 'low', high: guess.result === 'high'}") 
+                    span {{guess.guess}} is {{guess.result}}
+    script.
+        // Vue is included in the layout.pug file
+        Vue.createApp({
+            data: function () {
+                return {
+                    guess: '',
+                    guesses: [],
+                    success: false
+                }
+            },
+            mounted: function() {
+                // This is called as soon as the Vue app is mounted to the DOM
+                // We issue a call to initialize the game.
+                this.init();
+            },
+            methods: {
+                async init() {
+                    
+                    const response = await axios.get('/play');
+                    this.success = false;
+                    this.guess = '';
+
+
+                    // Array elements are reactive, but
+                    // reseting the array is not reactive.
+                    // So the preferred way to "clear" and array
+                    // is to use splice
+                    this.guesses.splice(0, this.guess.length);
+                },
+                async doGuess() {
+                    // Make a POST request to /play with the guess
+                    const response = await axios.post('/play', 
+                        { 
+                            guess: this.guess 
+                        });
+                    // Push the guess and result to the guesses array
+                    this.guesses.push ({
+                        guess: this.guess,
+                        result: response.data.result
+                    });
+
+                    // If the result is correct, set success to true
+                    if (response.data.result === 'complete') {
+                        this.success = true;
+                    }
+
+                    this.guess = '';
+                }
+            }
+        }).mount('#play')
+
+    
+    

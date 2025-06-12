@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    table
+        thead
+            tr
+                th Game ID
+                th Num Guesses
+                th Started
+                th User
+        tbody
+            each g in games.sort((a, b) => a.guesses.length - b.guesses.length)
+                tr
+                    td
+                        a(href="/history/"+g.id) #{g.id}
+                    td #{g.guesses.length}
+                    td #{g.time}
+                    td #{g.username}
+    a(href="/") Play the game!

@@ -1,0 +1,31 @@
+extends layout.pug
+
+block content
+    nav
+        a(href="/") Play the game!
+    .container#history
+        table 
+            thead 
+                tr 
+                    th Game ID 
+                    th Complete 
+                    th Num Guesses 
+                    th Started 
+            tbody 
+                tr(v-for='g in games')
+                    td: a(:href="'/history/'+g.id") {{g.id}}
+                    td: span(v-if='g.complete') Yes
+                    td {{g.num_guesses}}
+                    td {{g.time}}
+    script. 
+        Vue.createApp({
+            data: function () {
+                return {
+                    games: []
+                }
+            },
+            mounted: async function() {
+                const response = await axios.get('/history/games');
+                this.games = response.data;
+            }
+        }).mount('#history')

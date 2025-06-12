@@ -1,0 +1,13 @@
+mixin guess(guess, secret)
+    if guess == secret
+        li.correct.rounded-section #{guess} - Correct!
+    else if guess < secret 
+        li.low.rounded-section #{guess} - Too low! 
+    else 
+        li.high.rounded-section #{guess} - Too high!
+
+mixin guess_list(guesses, secret)
+    ul.guess-list
+        each guess in guesses
+            +guess(guess, secret)
+                

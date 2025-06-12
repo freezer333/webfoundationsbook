@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="guess.css" />
+        <title>Guessing Game</title>
+
+        <script src="guess.js"></script>
+    </head>
+    <body onload="init()">
+        <!-- This is the page that shows the first set of instructions, and the initial form -->
+        <section id="start" class="main-content">
+            <p class="guess-instructions">
+                I'm thinking of a number from 1-10!
+            </p>
+            <div class="guess-grid">
+                <!-- This form is going to be exactly the same in the second page, other than the input element
+                     having a different ID.  We can probably do better, but as an example we'll keep the redundancy
+                     so the code doesn't get complicated -->
+                <form class="rounded-section guess-form">
+                    <label for="guess">Enter your guess:</label>
+                    <div class="guess-input">
+                        <input
+                            autocomplete="off"
+                            class="guess-input"
+                            name="guess"
+                            placeholder="1-10"
+                            type="number"
+                            min="1"
+                            max="10"
+                        />
+                        <button type="button" onclick="make_guess(event)">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- This is the page that shows the error message when the guess is incorrect -->
+        <section id="guess" class="main-content">
+            <p id="sorry_message" , class="guess-feedback">
+                <!-- This will eventually say something like, "Sorry, your guess was too low, try again! -->
+            </p>
+            <div class="guess-grid">
+                <form class="rounded-section guess-form">
+                    <label for="guess">Enter your guess:</label>
+                    <div class="guess-input">
+                        <input
+                            autocomplete="off"
+                            class="guess-input"
+                            name="guess"
+                            placeholder="1-10"
+                            type="number"
+                            min="1"
+                            max="10"
+                        />
+                        <button type="button" onclick="make_guess(event)">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <ul class="guess-list"></ul>
+            </div>
+        </section>
+
+        <!-- This is the page that shows the congratulations message -->
+        <section id="complete" class="main-content">
+            <h1>Great job!</h1>
+            <div class="rounded-section correct">
+                <h1 id="success_message">
+                    <!--This will eventially say something like "5 was the number!" -->
+                </h1>
+                <p id="count_message">
+                    <!-- This will eventually say something like "It took you 5 guesses!" -->
+                </p>
+            </div>
+        </section>
+        <nav class="play-new">
+            <p><a onclick="init()" href="#">Start over</a></p>
+        </nav>
+    </body>
+</html>

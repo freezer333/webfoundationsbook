@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    section.main-content
+        h1 Great job!
+        .rounded-section.correct   
+            h1 #{game.secret} was the number!
+            p It took you #{game.guesses.length} guesses!
+            
+    nav.area
+        p: a(href="/history") Game History
+    
+    nav.play-new
+        p: a(href="/") Start over

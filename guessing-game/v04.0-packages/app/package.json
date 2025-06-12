@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "wf-framework": "^1.0.0",
+    "wf-guess-db": "^1.0.0",
+    "wf-guess-game": "^1.0.0"
+  }
+}

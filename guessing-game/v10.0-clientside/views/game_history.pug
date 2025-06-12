@@ -1,0 +1,14 @@
+extends layout
+include mixins 
+
+block content
+    .main-content
+        .guess-grid  
+            .summary.rounded-section.correct   
+                h1 #{game.secret} was the number!
+                p It took #{game.guesses.length} guesses!
+            +guess_list(game.guesses, game.secret)    
+    nav.area
+        p: a(href="/history") Back to game history!
+    nav.play-new
+        p: a(href="/") Start over

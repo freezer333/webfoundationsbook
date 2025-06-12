@@ -1,0 +1,19 @@
+extends layout
+include mixins
+
+block content
+    if response === undefined 
+        p I'm thinking of a number from 1-10!
+    else 
+        p Sorry, your guess was #{response}, try again! 
+        
+    form(action="/", method="POST")
+        label(for="guess") Enter your guess: 
+        input(name="guess", placeholder="1-10", type="number", min="1", max="10")
+        input(name="gameId", value=game.id, type="hidden")
+        button(type="submit") Submit
+    
+    +guess_list(game.guesses.reverse(), game.secret)   
+
+    div
+        a(href="/history") Game History

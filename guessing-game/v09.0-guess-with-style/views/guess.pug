@@ -1,0 +1,25 @@
+extends layout
+include mixins
+
+block content
+    .main-content
+        
+        if response === undefined 
+            p.guess-instructions I'm thinking of a number from 1-10!
+        else 
+            p.guess-feedback  Sorry, your guess was #{response}, try again! 
+
+        .guess-grid        
+            form(action="/", method="POST").rounded-section.guess-form 
+                    label(for="guess") Enter your guess: 
+                    .guess-input 
+                        input(name="guess", required, placeholder="1-10", type="number", min="1", max="10")
+                        button(type="submit") Submit
+                        
+            .guess-list 
+                +guess_list(game.guesses.reverse(), game.secret)   
+
+    nav.area
+        p: a(href="/history") Game History
+    nav.play-new
+        p: a(href="/") Start over
